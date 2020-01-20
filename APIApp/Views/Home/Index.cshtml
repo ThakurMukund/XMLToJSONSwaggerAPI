@@ -1,0 +1,63 @@
+﻿<div id="body">
+
+    <section class="content-wrapper main-content clear-fix">
+
+        <div>
+
+            <h2>All Employees</h2>
+
+        </div>
+
+        <div>
+
+            <table id="employees" style="border: 1px solid black;"></table>
+
+        </div>
+
+    </section>
+
+</div>
+
+@section scripts {
+
+    <script>
+
+        var apiEmployees = 'api/employee';
+
+        $(document).ready(function () {
+
+            // Send an AJAX request
+
+            var rows = '';
+
+            $('#employees').empty();
+
+            $.getJSON(apiEmployees,
+
+                function (data) {
+
+                    $.each(data, function (key, val) {
+
+                        var employeeURL = apiEmployees + '/' + val.EmployeeID;
+
+                        rows = rows + '<tr style="border: 1px solid black;"><td>  ' +
+
+                        '<a style="color: Blue; font-weight:bold; font-size:15px"'
+
+                           + 'href="' + employeeURL + '">' + val.ID + '</a>' +
+
+                            '</td><td>' + val.Cmp_Name +
+
+                            '</td><td>' + val.Address + '</td></tr>';
+
+                    });
+
+                    $('#employees').html(rows);
+
+                });
+
+        });
+
+    </script>
+
+}
